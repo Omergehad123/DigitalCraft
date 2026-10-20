@@ -1,10 +1,9 @@
-
-import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 
 const studioLinks = [
     { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
-    { label: "Projects", href: "/projects" },
+    { label: "Projects", href: "/portfolio" },
     { label: "Contact", href: "/contact" },
 ];
 
@@ -31,8 +30,8 @@ export default function Footer() {
 
                 {/* Brand */}
                 <div className="max-w-sm">
-                    <a
-                        href="/"
+                    <Link
+                        to="/"
                         aria-label="Digital Craft home"
                         className="inline-flex items-center gap-3 mb-5"
                     >
@@ -43,7 +42,7 @@ export default function Footer() {
                         <span className="text-xl font-bold text-white">
                             Digital Craft
                         </span>
-                    </a>
+                    </Link>
 
                     <p className="text-[15px] sm:text-base leading-relaxed text-emerald-100/70">
                         We bring design, technology, and creativity together
@@ -51,13 +50,13 @@ export default function Footer() {
                         grow and stand out online.
                     </p>
 
-                    <a
-                        href="/contact"
+                    <Link
+                        to="/contact"
                         className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-white transition-colors hover:text-emerald-300"
                     >
                         Let's build something together
                         <span aria-hidden="true">↗</span>
-                    </a>
+                    </Link>
                 </div>
 
                 {/* Navigation */}
@@ -69,12 +68,12 @@ export default function Footer() {
                     <ul className="flex flex-col gap-3">
                         {studioLinks.map((link) => (
                             <li key={link.label}>
-                                <a
-                                    href={link.href}
+                                <Link
+                                    to={link.href}
                                     className={linkClass}
                                 >
                                     {link.label}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>
@@ -89,12 +88,12 @@ export default function Footer() {
                     <ul className="flex flex-col gap-3">
                         {capabilities.map((capability) => (
                             <li key={capability}>
-                                <a
-                                    href="/services"
+                                <Link
+                                    to="/services"
                                     className={linkClass}
                                 >
                                     {capability}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>
@@ -111,12 +110,12 @@ export default function Footer() {
                         explore how we can bring your idea to life.
                     </p>
 
-                    <a
-                        href="/contact"
+                    <Link
+                        to="/contact"
                         className="inline-flex items-center justify-center rounded-md bg-white px-5 py-3 text-sm font-semibold text-[#013E2C] transition-colors hover:bg-emerald-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                     >
                         Start a Project
-                    </a>
+                    </Link>
 
                     {/* Add your verified business contact details here */}
                     {/*

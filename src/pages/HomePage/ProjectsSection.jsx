@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Link } from "react-router-dom";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -134,13 +135,13 @@ function ProjectsSection() {
                         Real Digital Experiences
                     </h2>
                 </div>
-                <a
-                    href="/projects"
+                <Link
+                    to="/portfolio"
                     className="group inline-flex items-center gap-2 text-base sm:text-lg font-semibold text-(--main-color) hover:text-(--second-color) transition-colors"
                 >
                     <span>Explore Full Portfolio</span>
                     <FaLongArrowAltRight className="transition-transform duration-300 group-hover:translate-x-1.5" />
-                </a>
+                </Link>
             </div>
 
             <div className="flex items-center justify-start gap-3 mb-6">

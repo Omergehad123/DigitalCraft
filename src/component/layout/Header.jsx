@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
 import Button from "../ui/Button";
 
@@ -9,36 +10,36 @@ export default function Header() {
         <header className="bg-(--bg-color)">
             {/* Desktop Navbar */}
             <div className='hidden xl:flex items-center justify-between px-10 py-5'>
-                <a href="/" className='flex items-center gap-2'>
+                <Link to="/" className='flex items-center gap-2'>
                     <img src="/logo.png" alt="logo" className='w-50' />
-                </a>
+                </Link>
                 <ul className="flex gap-6 items-center">
                     <li>
-                        <a
-                            href="/"
+                        <Link
+                            to="/"
                             className="relative uppercase text-(--main-color) text-2xl group"
                         >
                             Home
                             <span className="absolute left-0 -bottom-1 w-0 h-1 bg-(--main-color) transition-all duration-300 group-hover:w-full"></span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
-                            href="/services"
+                        <Link
+                            to="/services"
                             className="relative uppercase text-(--main-color) text-2xl group"
                         >
                             Services
                             <span className="absolute left-0 -bottom-1 w-0 h-1 bg-(--main-color) transition-all duration-300 group-hover:w-full"></span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
-                            href="/portfolio"
+                        <Link
+                            to="/portfolio"
                             className="relative uppercase text-(--main-color) text-2xl group"
                         >
                             Portfolio
                             <span className="absolute left-0 -bottom-1 w-0 h-1 bg-(--main-color) transition-all duration-300 group-hover:w-full"></span>
-                        </a>
+                        </Link>
                     </li>
 
                 </ul>
@@ -54,9 +55,9 @@ export default function Header() {
 
             {/* Mobile Navbar */}
             <div className='lg:hidden flex items-center justify-between px-4 py-5 relative'>
-                <a href="/" className='flex gap-2'>
+                <Link to="/" className='flex gap-2'>
                     <img src="/logo.png" alt="logo" className='w-50' />
-                </a>
+                </Link>
                 {/* Menu Button */}
                 <button
                     type="button"
@@ -82,31 +83,31 @@ export default function Header() {
                         </button>
                     </li>
                     <li>
-                        <a
-                            href="/"
+                        <Link
+                            to="/"
                             className="relative uppercase text-(--white-color) text-2xl"
                             onClick={() => setMenuOpen(false)}
                         >
                             Home
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
-                            href="/services"
+                        <Link
+                            to="/services"
                             className="relative uppercase text-(--white-color) text-2xl"
                             onClick={() => setMenuOpen(false)}
                         >
                             Services
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
-                            href="/portfolio"
+                        <Link
+                            to="/portfolio"
                             className="relative uppercase text-(--white-color) text-2xl"
                             onClick={() => setMenuOpen(false)}
                         >
                             Portfolio
-                        </a>
+                        </Link>
                     </li>
                     <li>
                         <div onClick={() => setMenuOpen(false)}>

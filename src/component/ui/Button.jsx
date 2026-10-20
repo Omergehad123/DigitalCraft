@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
 function Button({ text = "Get Started", link = "#" }) {
     return (
-        <a href={link} className="
+        <Link to={link} className="
         inline-block 
         px-10 py-2 
         bg-(--main-color) 
@@ -16,7 +18,7 @@ function Button({ text = "Get Started", link = "#" }) {
       "
         >
             {text}
-        </a>
+        </Link>
     );
 }
 

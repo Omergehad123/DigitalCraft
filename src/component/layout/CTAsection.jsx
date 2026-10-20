@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FaLongArrowAltRight } from 'react-icons/fa';
 
 function CTAsection() {
@@ -40,21 +41,21 @@ function CTAsection() {
 
                     {/* Actions */}
                     <div className="flex flex-col items-start md:items-end gap-4 shrink-0">
-                        <a
-                            href="/contact"
+                        <Link
+                            to="/contact"
                             className="group inline-flex items-center gap-4 rounded-full bg-white pl-8 pr-3 py-3 text-lg font-bold text-emerald-900 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.5)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                         >
                             <span>Book a technical consultation</span>
                             <span className="flex h-11 w-11 items-center justify-center rounded-full bg-emerald-600 text-white transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none">
                                 <FaLongArrowAltRight />
                             </span>
-                        </a>
-                        <a
-                            href="/projects"
+                        </Link>
+                        <Link
+                            to="/portfolio"
                             className="text-sm font-semibold text-white/85 border-b border-white/30 pb-0.5 hover:text-white hover:border-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                         >
                             Or browse the work first
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

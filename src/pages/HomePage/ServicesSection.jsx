@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import {
     LuPanelRight,
@@ -168,13 +169,13 @@ function ServicesSection() {
                     </h2>
                 </div>
 
-                <a
-                    href="/services"
+                <Link
+                    to="/services"
                     className="group inline-flex items-center gap-2 text-base sm:text-lg font-semibold text-(--main-color) hover:text-(--second-color) transition-colors"
                 >
                     <span>Explore All Services</span>
                     <FaLongArrowAltRight className="transition-transform duration-300 group-hover:translate-x-1.5" />
-                </a>
+                </Link>
             </div>
 
             {/* Main Interactive Div: Left Title (Sticky) + Right Service Cards */}

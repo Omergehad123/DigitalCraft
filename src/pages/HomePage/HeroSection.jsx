@@ -53,7 +53,7 @@ function HeroSection() {
 
                     <div className="mb-8 flex flex-wrap gap-3">
                         <Button text="Start a Project" link="/content" />
-                        <OutlineBtn text="Explore Our Work" link="/projects" />
+                        <OutlineBtn text="Explore Our Work" link="/portfolio" />
                     </div>
 
                     <ul className="mb-10 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-(--second-color)">
