@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --main-color: #013E2C;
+    --second-color: #16754F;
+    --white-color: #FFFFFF;
+    --bg-color: #EAF5EF;
+    
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+  }
+
+  body {
+    font-family: "Dhurjati", sans-serif;
+  }
+}
+
+.projects-swiper {
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 2.5rem;
+}
+
+.projects-swiper .swiper-slide {
+  height: auto;
+}
+
+.projects-swiper .swiper-pagination-bullet {
+  background: var(--main-color);
+  opacity: 0.25;
+}
+
+.projects-swiper .swiper-pagination-bullet-active {
+  background: var(--second-color);
+  opacity: 1;
+}
+
+@custom-variant hover (&:hover);
+
