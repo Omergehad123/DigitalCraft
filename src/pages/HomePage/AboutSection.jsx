@@ -26,19 +26,27 @@ const services = [
 
 function AboutSection() {
     return (
-        <section className="py-16 lg:py-24 px-5 lg:px-12 xl:px-16">
+        <section className="py-16 lg:py-24 px-5 lg:px-12 xl:px-16 bg-(--bg-color)">
             <div className='flex lg:justify-between flex-wrap gap-5 w-full'>
-                <div className=''>
-                    <h6 className='text-(--second-color) uppercase'>#1 // who we are</h6>
-                    <p className='text-[#777]'>Engineering Precision & Measurable Growth</p>
+                {/* header of the section  */}
+                <div>
+                    <div className="flex items-center gap-2 mb-2">
+                        <h6 className="text-(--second-color) uppercase tracking-[0.2em] text-xs font-semibold font-mono">
+                            #1 // who we are
+                        </h6>
+                    </div>
+                    <h2 className="text-2xl lg:text-4xl font-extrabold text-(--main-color) tracking-tight">
+                        Engineering Precision & Measurable Growth
+                    </h2>
                 </div>
                 <div className=''>
-                    <h1 className='text-2xl lg:text-4xl hidden lg:block'>We are a full-lifecycle software and growth agency. <br />
+                    <h1 className='text-2xl lg:text-4xl hidden lg:block'>
+                        We are a full-lifecycle software and growth agency. <br />
                         We bridge the gap between engineering high-performance <br />
                         websites and mobile applications and scaling them <br />
                         through deliberate SEO, high-intent Google Ads, and <br /> multi-channel digital marketing.
                     </h1>
-                    <h1 className='text-xl lg:text-4xl lg:hidden block'>We are a full-lifecycle software and growth agency. We bridge the gap between engineering high-performance websites and mobile applications and scaling them through deliberate SEO, high-intent Google Ads, and multi-channel digital marketing.
+                    <h1 className='text-lg lg:text-4xl lg:hidden block'>We are a full-lifecycle software and growth agency. We bridge the gap between engineering high-performance websites and mobile applications and scaling them through deliberate SEO, high-intent Google Ads, and multi-channel digital marketing.
                     </h1>
                     <div className="flex items-center justify-center flex-wrap gap-5 mt-8">
                         {services.map((service, idx) => (

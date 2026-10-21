@@ -181,7 +181,7 @@ function ServicesSection() {
             {/* Main Interactive Div: Left Title (Sticky) + Right Service Cards */}
             <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
                 {/* LEFT COLUMN: Static / Sticky Title & Interactive Navigator */}
-                <div className="lg:col-span-5 lg:sticky lg:top-28 z-20">
+                <div className="lg:col-span-5 lg:sticky lg:top-28 z-20 lg:block hidden">
                     <div className="bg-white/90 backdrop-blur-md lg:bg-transparent rounded-2xl p-5 sm:p-7 lg:p-0 border border-[rgba(22,117,79,0.12)] lg:border-none shadow-sm lg:shadow-none">
                         {/* Spec Tag & Progress */}
                         <div className="flex items-center justify-between gap-4 mb-4">

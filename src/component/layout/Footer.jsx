@@ -18,10 +18,10 @@ const capabilities = [
 ];
 
 const headingClass =
-    "mb-5 text-xs font-semibold uppercase tracking-[0.12em] text-emerald-300/80";
+    "mb-5 text-lg font-semibold uppercase tracking-[0.12em] text-(--white-color)";
 
 const linkClass =
-    "text-[15px] sm:text-base text-emerald-200/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300";
+    "text-[15px] sm:text-base text-[#999] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300";
 
 export default function Footer() {
     return (
@@ -35,13 +35,7 @@ export default function Footer() {
                         aria-label="Digital Craft home"
                         className="inline-flex items-center gap-3 mb-5"
                     >
-                        <span className="flex h-11 w-11 items-center justify-center rounded-md bg-white text-[#013E2C] text-lg font-black tracking-tighter">
-                            DC
-                        </span>
-
-                        <span className="text-xl font-bold text-white">
-                            Digital Craft
-                        </span>
+                        <img src="/icon.jpeg" alt="" className="w-20" />
                     </Link>
 
                     <p className="text-[15px] sm:text-base leading-relaxed text-emerald-100/70">

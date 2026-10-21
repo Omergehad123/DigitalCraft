@@ -29,8 +29,8 @@ function CheckIcon() {
 
 function HeroSection() {
     return (
-        <section className="relative isolate w-full overflow-hidden bg-(--bg-color)">
-            <div className="mx-auto grid min-h-[90vh] w-[90%] max-w-7xl items-center gap-14 py-20 lg:w-[80%] lg:grid-cols-2 lg:gap-10">
+        <section className="relative isolate w-full overflow-hidden bg-(-white-color)">
+            <div className="mx-auto grid min-h-[90vh] w-[90%] max-w-8xl items-center gap-14 py-20 lg:w-[90%] lg:grid-cols-2 lg:gap-10">
                 {/* Copy */}
                 <div className="hero-rise">
                     <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-[rgba(22,137,113,0.25)] bg-white/70 px-4 py-1.5 text-sm font-medium text-(--main-color) backdrop-blur">

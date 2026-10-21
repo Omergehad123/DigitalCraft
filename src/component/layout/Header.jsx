@@ -7,7 +7,7 @@ export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <header className="bg-(--bg-color)">
+        <header className="shadow-sm">
             {/* Desktop Navbar */}
             <div className='hidden xl:flex items-center justify-between px-10 py-5'>
                 <Link to="/" className='flex items-center gap-2'>
@@ -41,15 +41,12 @@ export default function Header() {
                             <span className="absolute left-0 -bottom-1 w-0 h-1 bg-(--main-color) transition-all duration-300 group-hover:w-full"></span>
                         </Link>
                     </li>
-
                 </ul>
-
                 <div className="flex items-center gap-5">
                     <Button text="Get Started" link="/contact" />
                     <button className=" cursor-pointer flex items-center gap-2 bg-(--main-color) rounded-lg text-(--white-color) p-1">
                         EN
                     </button>
-
                 </div>
             </div>
 
