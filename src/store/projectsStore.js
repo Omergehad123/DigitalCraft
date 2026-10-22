@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export const useProjectsStore = create((set, get) => ({
+export const useProjectsStore = create((set) => ({
   activeCategory: 'Websites',
   
   categories: [

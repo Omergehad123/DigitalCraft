@@ -1,5 +1,4 @@
-import React from 'react'
-import HeroSection from './HeroSection'
+import HeroSection from './HeroSection';
 import ServicesSection from './ServicesSection'
 import CTAsection from '../../component/layout/CTAsection'
 

@@ -1,20 +1,28 @@
-import { FaLongArrowAltRight } from 'react-icons/fa';
-import Button from "../../component/ui/Button"
-import OutlineBtn from "../../component/ui/OutlineBtn"
-const services = [
-    { title: "Websites", note: "Fast, responsive, built to convert" },
-    { title: "Mobile apps", note: "Native feel on iOS and Android" },
-    { title: "Design", note: "Interfaces people enjoy using" },
-    { title: "Digital marketing", note: "Reach the customers who matter" },
-];
+import Button from "../../component/ui/Button";
+import OutlineBtn from "../../component/ui/OutlineBtn";
+import useLanguageStore from "../../store/languageStore";
 
 function HeroSection() {
+    const { language, t } = useLanguageStore();
+
+    const services = language === 'ar' ? [
+        { title: "مواقع إلكترونية", note: "سريعة، متجاوبة ومجهزة للتحويل" },
+        { title: "تطبيقات جوال", note: "أداء أصيل على iOS وأندرويد" },
+        { title: "تصميم واجهات", note: "واجهات مريحة يستمتع بها المستخدم" },
+        { title: "تسويق رقمي", note: "وصول دقيق للعملاء المهتمين" },
+    ] : [
+        { title: "Websites", note: "Fast, responsive, built to convert" },
+        { title: "Mobile apps", note: "Native feel on iOS and Android" },
+        { title: "Design", note: "Interfaces people enjoy using" },
+        { title: "Digital marketing", note: "Reach the customers who matter" },
+    ];
+
     return (
         <section className="w-full px-4 lg:px-10 py-6 lg:py-10">
             <div className="relative max-w-7xl mx-auto overflow-hidden rounded-[2rem] bg-[#06150f] px-6 sm:px-10 lg:px-16 pt-16 lg:pt-24 pb-10 lg:pb-14">
                 {/* Ambient glow + faint grid */}
-                <div className="pointer-events-none absolute -top-48 -right-32 w-140 h-140 rounded-full bg-emerald-500/25 blur-[130px]" aria-hidden="true" />
-                <div className="pointer-events-none absolute -bottom-56 -left-40 w-120 h-120 rounded-full bg-teal-400/10 blur-[120px]" aria-hidden="true" />
+                <div className="pointer-events-none absolute -top-48 -end-32 w-140 h-140 rounded-full bg-emerald-500/25 blur-[130px]" aria-hidden="true" />
+                <div className="pointer-events-none absolute -bottom-56 -start-40 w-120 h-120 rounded-full bg-teal-400/10 blur-[120px]" aria-hidden="true" />
                 <div
                     className="pointer-events-none absolute inset-0 opacity-[0.07]"
                     aria-hidden="true"
@@ -30,24 +38,24 @@ function HeroSection() {
                 <div className="relative">
                     <p className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 text-sm font-medium text-emerald-200 mb-8">
                         <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
-                        Our services
+                        {t('servicesPage.badge')}
                     </p>
 
-                    <h1 className="max-w-4xl text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.02] text-(--white-color)">
-                        Digital solutions built around{" "}
+                    <h1 className="max-w-4xl text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.05] text-(--white-color)">
+                        {t('servicesPage.titleLead')}{" "}
                         <span className="text-(--second-color)">
-                            your business.
+                            {t('servicesPage.titleHighlight')}
                         </span>
                     </h1>
 
                     <div className="mt-8 lg:mt-10 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
                         <p className="max-w-xl text-base lg:text-lg leading-relaxed text-white/65">
-                            From websites and mobile applications to design and digital marketing, we combine creativity and technology to turn your ideas into practical solutions that help your business grow.
+                            {t('servicesPage.description')}
                         </p>
 
                         <div className="flex flex-wrap items-center gap-4">
-                            <Button text="Start A Project" link='/contact' />
-                            <OutlineBtn text="see our work" link='/contact' />
+                            <Button text={t('common.startProject')} link="/contact" />
+                            <OutlineBtn text={t('common.seeOurWork')} link="/portfolio" />
                         </div>
                     </div>
 
@@ -56,7 +64,7 @@ function HeroSection() {
                         {services.map((s, i) => (
                             <li
                                 key={s.title}
-                                className={`py-6 pr-4 lg:px-6 lg:first:pl-0 ${i > 0 ? "lg:border-l lg:border-white/10" : ""}`}
+                                className={`py-6 pe-4 lg:px-6 lg:first:ps-0 ${i > 0 ? "lg:border-s lg:border-white/10" : ""}`}
                             >
                                 <span className="block text-sm font-mono text-emerald-300/70 mb-2">
                                     {String(i + 1).padStart(2, "0")}

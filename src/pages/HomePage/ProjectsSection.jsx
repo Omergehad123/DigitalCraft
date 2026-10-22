@@ -5,86 +5,93 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import useLanguageStore from "../../store/languageStore";
 
-const projects = [
+const projectsData = [
     {
-        category: "Enterprise",
-        title: "Aetheria Cloud Infrastructure",
-        description:
-            "A mission-critical global telemetry and cloud resource orchestration backend, engineered to handle over 40 million concurrent telemetry events with zero downtime.",
+        categoryEn: "Enterprise",
+        categoryAr: "منصات مؤسسية",
+        titleEn: "Aetheria Cloud Infrastructure",
+        titleAr: "بنية أثيريا السحابية",
+        descEn: "A mission-critical global telemetry and cloud resource orchestration backend, engineered to handle over 40 million concurrent telemetry events with zero downtime.",
+        descAr: "نظام قياس وإدارة موارد سحابية للمؤسسات مصمم لمعالجة أكثر من 40 مليون عملية متزامنة دون أي توقف في الخدمة.",
         techs: ["React", "Node.js", "AWS", "TimescaleDB", "Microservices"],
         image: "project1.png",
         site: "https://aetheria.cloud/casestudy",
     },
     {
-        category: "Health & Fitness",
-        title: "Pulse360 Fitness Tracker",
-        description:
-            "Cross-platform native mobile app delivering real-time health insights with live biometric integration, AI workout guidance, and offline-first exercise logging.",
-        techs: ["React Native", "TensorFlow Lite", "Firebase", "Apple HealthKit", "Android Sensors"],
+        categoryEn: "Health & Fitness",
+        categoryAr: "الصحة واللياقة",
+        titleEn: "Pulse360 Fitness Tracker",
+        titleAr: "تطبيق النبض 360 الرياضي",
+        descEn: "Cross-platform native mobile app delivering real-time health insights with live biometric integration, AI workout guidance, and offline-first exercise logging.",
+        descAr: "تطبيق جوال متعدد المنصات يقدم بيانات صحية فورية مع دمج القياسات الحيوية وتوجيه التمارين بالذكاء الاصطناعي.",
+        techs: ["React Native", "TensorFlow Lite", "Firebase", "Apple HealthKit"],
         image: "project2.png",
         site: "https://pulse360.com/casestudy",
     },
     {
-        category: "E-Commerce",
-        title: "Lumen Marketplace",
-        description:
-            "A high-conversion storefront and vendor dashboard with realtime inventory, checkout optimization, and campaign analytics for multi-brand retail teams.",
+        categoryEn: "E-Commerce",
+        categoryAr: "تجارة إلكترونية",
+        titleEn: "Lumen Marketplace",
+        titleAr: "سوق لومن التجاري",
+        descEn: "A high-conversion storefront and vendor dashboard with realtime inventory, checkout optimization, and campaign analytics for multi-brand retail teams.",
+        descAr: "متجر إلكتروني فائق التحويل ولوحة تحكم متطورة للبائعين مع تتبع فوري للمخزون وتحليلات دقيقة للمبيعات.",
         techs: ["Next.js", "Stripe", "PostgreSQL", "Redis", "Tailwind"],
         image: "project1.png",
         site: "https://lumen.shop/casestudy",
     },
     {
-        category: "Fintech",
-        title: "Northline Payments",
-        description:
-            "Secure payment orchestration with fraud scoring, settlement reporting, and a merchant portal designed for high-volume transaction workflows.",
+        categoryEn: "Fintech",
+        categoryAr: "تكنولوجيا مالية",
+        titleEn: "Northline Payments",
+        titleAr: "بوابة نورث لاين للمدفوعات",
+        descEn: "Secure payment orchestration with fraud scoring, settlement reporting, and a merchant portal designed for high-volume transaction workflows.",
+        descAr: "معالجة مدفوعات آمنة مع نظام كشف الاحتيال وتقارير تسوية مالية وبوابة تجار للمدفوعات الضخمة.",
         techs: ["React", "Go", "Kafka", "PostgreSQL", "Kubernetes"],
         image: "project2.png",
         site: "https://northline.pay/casestudy",
     },
     {
-        category: "SaaS",
-        title: "Harbor Ops Platform",
-        description:
-            "An operations console for distributed teams with live status boards, role-based access, and automated incident routing across regions.",
+        categoryEn: "SaaS",
+        categoryAr: "برمجيات SaaS",
+        titleEn: "Harbor Ops Platform",
+        titleAr: "منصة عمليات هاربور",
+        descEn: "An operations console for distributed teams with live status boards, role-based access, and automated incident routing across regions.",
+        descAr: "منصة إدارة عمليات للفرق الموزعة مع لوحات متابعة فورية وإدارة صلاحيات وأتمتة مسارات الحوادث التقنية.",
         techs: ["React", "TypeScript", "GraphQL", "Node.js", "MongoDB"],
         image: "project1.png",
         site: "https://harborops.io/casestudy",
     },
-    {
-        category: "Education",
-        title: "Atlas Learning Hub",
-        description:
-            "A learner platform with adaptive courses, progress analytics, and instructor tools built for high-concurrency live classrooms.",
-        techs: ["Next.js", "WebRTC", "Prisma", "PostgreSQL", "AWS"],
-        image: "project2.png",
-        site: "https://atlaslearn.app/casestudy",
-    },
 ];
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, language, liveText }) {
+    const isAr = language === 'ar';
+    const title = isAr ? project.titleAr : project.titleEn;
+    const desc = isAr ? project.descAr : project.descEn;
+    const category = isAr ? project.categoryAr : project.categoryEn;
+
     return (
         <div
             className="bg-white rounded-2xl shadow-sm p-6 flex flex-col gap-5 w-full h-full border border-[rgba(22,137,113,0.10)]"
             style={{ boxShadow: "0 8px 32px 0 rgba(22,117,79,0.07)" }}
         >
             <div className="relative">
-                <span className="absolute top-3 left-3 z-10 bg-(--main-color) text-(--white-color) text-xs font-semibold px-3 py-1 rounded-full border border-[rgba(22,137,113,0.15)] uppercase tracking-wide shadow-sm">
-                    {project.category}
+                <span className="absolute top-3 start-3 z-10 bg-(--main-color) text-(--white-color) text-xs font-semibold px-3 py-1 rounded-full border border-[rgba(22,137,113,0.15)] uppercase tracking-wide shadow-sm">
+                    {category}
                 </span>
                 <img
                     src={project.image}
-                    alt={project.title}
+                    alt={title}
                     className="w-full h-44 object-cover rounded-lg border border-[rgba(22,137,113,0.09)]"
                 />
             </div>
             <div>
                 <h3 className="text-lg font-extrabold text-(--main-color) leading-snug">
-                    {project.title}
+                    {title}
                 </h3>
                 <p className="text-sm text-[#52726B] font-normal mb-4 mt-1 min-h-[48px]">
-                    {project.description}
+                    {desc}
                 </p>
             </div>
             <div className="flex flex-wrap gap-2 mb-3">
@@ -103,14 +110,14 @@ function ProjectCard({ project }) {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                Live Link
+                {liveText}
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={2}
                     stroke="currentColor"
-                    className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                    className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180"
                 >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L21 10.5m0 0l-3.75 3.75M21 10.5H3" />
                 </svg>
@@ -121,6 +128,7 @@ function ProjectCard({ project }) {
 
 function ProjectsSection() {
     const swiperRef = useRef(null);
+    const { language, t } = useLanguageStore();
 
     return (
         <section className="w-full py-16 lg:py-24 px-5 lg:px-12 xl:px-16 bg-(--bg-color) overflow-x-hidden">
@@ -128,19 +136,19 @@ function ProjectsSection() {
                 <div>
                     <div className="flex items-center gap-2 mb-2">
                         <h6 className="text-(--second-color) uppercase tracking-[0.2em] text-xs font-semibold font-mono">
-                            #3 // Selected Work
+                            {t('homeProjects.label')}
                         </h6>
                     </div>
                     <h2 className="text-2xl lg:text-4xl font-extrabold text-(--main-color) tracking-tight">
-                        Real Digital Experiences
+                        {t('homeProjects.title')}
                     </h2>
                 </div>
                 <Link
                     to="/portfolio"
                     className="group inline-flex items-center gap-2 text-base sm:text-lg font-semibold text-(--main-color) hover:text-(--second-color) transition-colors"
                 >
-                    <span>Explore Full Portfolio</span>
-                    <FaLongArrowAltRight className="transition-transform duration-300 group-hover:translate-x-1.5" />
+                    <span>{language === 'ar' ? 'استكشف معرض الأعمال كاملاً' : 'Explore Full Portfolio'}</span>
+                    <FaLongArrowAltRight className="transition-transform duration-300 group-hover:translate-x-1.5 rtl:group-hover:-translate-x-1.5 rtl:rotate-180" />
                 </Link>
             </div>
 
@@ -151,7 +159,7 @@ function ProjectsSection() {
                     onClick={() => swiperRef.current?.slidePrev()}
                     className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-(--main-color) text-(--main-color) transition-all duration-300 hover:bg-(--main-color) hover:text-(--white-color) cursor-pointer"
                 >
-                    <FaLongArrowAltLeft />
+                    <FaLongArrowAltLeft className="rtl:rotate-180" />
                 </button>
                 <button
                     type="button"
@@ -159,12 +167,14 @@ function ProjectsSection() {
                     onClick={() => swiperRef.current?.slideNext()}
                     className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-(--main-color) text-(--main-color) transition-all duration-300 hover:bg-(--main-color) hover:text-(--white-color) cursor-pointer"
                 >
-                    <FaLongArrowAltRight />
+                    <FaLongArrowAltRight className="rtl:rotate-180" />
                 </button>
             </div>
 
             <Swiper
                 className="projects-swiper"
+                key={language}
+                dir={language === 'ar' ? 'rtl' : 'ltr'}
                 slidesPerView={3}
                 spaceBetween={30}
                 pagination={{
@@ -186,9 +196,13 @@ function ProjectsSection() {
                     1024: { slidesPerView: 3 },
                 }}
             >
-                {projects.map((project) => (
-                    <SwiperSlide key={project.title}>
-                        <ProjectCard project={project} />
+                {projectsData.map((project) => (
+                    <SwiperSlide key={project.titleEn}>
+                        <ProjectCard
+                            project={project}
+                            language={language}
+                            liveText={t('common.liveLink')}
+                        />
                     </SwiperSlide>
                 ))}
             </Swiper>

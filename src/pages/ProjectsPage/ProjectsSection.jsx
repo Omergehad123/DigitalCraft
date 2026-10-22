@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { FiArrowDown, FiChevronRight } from 'react-icons/fi';
 import useProjectsStore from '../../store/projectsStore';
+import useLanguageStore from '../../store/languageStore';
 
-function ProjectCard({ project, index }) {
+function ProjectCard({ project, index, isAr }) {
   const isImageTop = index % 2 === 0;
   const projectLink = project.link || project.demo;
 
@@ -21,7 +22,7 @@ function ProjectCard({ project, index }) {
             />
             <div className="absolute inset-0 bg-linear-to-t from-[#061911] via-transparent to-black/30" />
 
-            <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
+            <div className="absolute top-3 start-3 end-3 flex justify-between items-start">
               <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-black/60 text-emerald-300 border border-emerald-500/30 backdrop-blur-sm">
                 {project.category}
               </span>
@@ -38,7 +39,7 @@ function ProjectCard({ project, index }) {
               )}
             </div>
 
-            <div className="absolute bottom-3 left-3 right-3">
+            <div className="absolute bottom-3 start-3 end-3">
               <p className="text-xs text-white/80 line-clamp-1 font-medium">{project.tagline}</p>
               <div className="flex flex-wrap gap-1.5 mt-2">
                 {project.badges?.map((badge, idx) => (
@@ -60,7 +61,7 @@ function ProjectCard({ project, index }) {
                 <span className="text-4xl sm:text-5xl font-black text-white/90 tracking-tight font-serif">
                   {project.number}
                 </span>
-                <div className="text-right">
+                <div className="text-end">
                   <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-300 transition-colors">
                     {project.title}
                   </h3>
@@ -71,7 +72,9 @@ function ProjectCard({ project, index }) {
               </div>
 
               <div className="mt-4 pt-3 border-t border-white/10">
-                <p className="text-sm font-bold text-white tracking-wide mb-1.5">Tools and features</p>
+                <p className="text-sm font-bold text-white tracking-wide mb-1.5">
+                  {isAr ? 'الأدوات والتقنيات' : 'Tools and features'}
+                </p>
                 <p className="text-xs text-white/60 leading-relaxed font-mono">{project.tools}</p>
               </div>
             </div>
@@ -84,11 +87,11 @@ function ProjectCard({ project, index }) {
                   rel="noreferrer"
                   className="inline-flex items-center gap-1 group-hover:text-emerald-300 transition-colors"
                 >
-                  Direct link <FiChevronRight />
+                  {isAr ? 'رابط مباشر' : 'Direct link'} <FiChevronRight className="rtl:rotate-180" />
                 </a>
               ) : (
                 <span className="inline-flex items-center gap-1 group-hover:text-emerald-300 transition-colors">
-                  Explore project <FiChevronRight />
+                  {isAr ? 'استعراض المشروع' : 'Explore project'} <FiChevronRight className="rtl:rotate-180" />
                 </span>
               )}
               <span className="font-mono text-[11px]">#{project.id}</span>
@@ -104,7 +107,7 @@ function ProjectCard({ project, index }) {
                 <span className="text-4xl sm:text-5xl font-black text-white/90 tracking-tight font-serif">
                   {project.number}
                 </span>
-                <div className="text-right">
+                <div className="text-end">
                   <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-300 transition-colors">
                     {project.title}
                   </h3>
@@ -115,12 +118,14 @@ function ProjectCard({ project, index }) {
               </div>
 
               <div className="mt-4 pt-3 border-t border-white/10">
-                <p className="text-sm font-bold text-white tracking-wide mb-1.5">Tools and features</p>
+                <p className="text-sm font-bold text-white tracking-wide mb-1.5">
+                  {isAr ? 'الأدوات والتقنيات' : 'Tools and features'}
+                </p>
                 <p className="text-xs text-white/60 leading-relaxed font-mono">{project.tools}</p>
               </div>
             </div>
 
-            <div className="pt-2 flex items-center justify-between text-xs text-white/40">
+            <div className="pt-3 flex items-center justify-between text-xs text-white/40">
               {projectLink ? (
                 <a
                   href={projectLink}
@@ -128,11 +133,11 @@ function ProjectCard({ project, index }) {
                   rel="noreferrer"
                   className="inline-flex items-center gap-1 group-hover:text-emerald-300 transition-colors"
                 >
-                  Direct link <FiChevronRight />
+                  {isAr ? 'رابط مباشر' : 'Direct link'} <FiChevronRight className="rtl:rotate-180" />
                 </a>
               ) : (
                 <span className="inline-flex items-center gap-1 group-hover:text-emerald-300 transition-colors">
-                  Explore project <FiChevronRight />
+                  {isAr ? 'استعراض المشروع' : 'Explore project'} <FiChevronRight className="rtl:rotate-180" />
                 </span>
               )}
               <span className="font-mono text-[11px]">#{project.id}</span>
@@ -149,7 +154,7 @@ function ProjectCard({ project, index }) {
             />
             <div className="absolute inset-0 bg-linear-to-t from-[#061911] via-transparent to-black/30" />
 
-            <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
+            <div className="absolute top-3 start-3 end-3 flex justify-between items-start">
               <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-black/60 text-emerald-300 border border-emerald-500/30 backdrop-blur-sm">
                 {project.category}
               </span>
@@ -166,7 +171,7 @@ function ProjectCard({ project, index }) {
               )}
             </div>
 
-            <div className="absolute bottom-3 left-3 right-3">
+            <div className="absolute bottom-3 start-3 end-3">
               <p className="text-xs text-white/80 line-clamp-1 font-medium">{project.tagline}</p>
               <div className="flex flex-wrap gap-1.5 mt-2">
                 {project.badges?.map((badge, idx) => (
@@ -190,12 +195,15 @@ function CategoryTrackSection({ category, index, total }) {
   const containerRef = useRef(null);
   const trackRef = useRef(null);
   const progressRef = useRef(null);
+  const { language } = useLanguageStore();
+  const isAr = language === 'ar';
 
   useEffect(() => {
     let frameId;
 
     const updateScroll = () => {
       if (!containerRef.current || !trackRef.current) return;
+
       const rect = containerRef.current.getBoundingClientRect();
       const scrollableDistance = containerRef.current.offsetHeight - window.innerHeight;
 
@@ -205,7 +213,8 @@ function CategoryTrackSection({ category, index, total }) {
       const track = trackRef.current;
       const maxTranslate = Math.max(0, track.scrollWidth - window.innerWidth + 96);
 
-      track.style.transform = `translate3d(-${progress * maxTranslate}px, 0, 0)`;
+      const sign = isAr ? '' : '-';
+      track.style.transform = `translate3d(${sign}${progress * maxTranslate}px, 0, 0)`;
 
       if (progressRef.current) {
         progressRef.current.style.width = `${progress * 100}%`;
@@ -226,7 +235,7 @@ function CategoryTrackSection({ category, index, total }) {
       window.removeEventListener('resize', handleScroll);
       cancelAnimationFrame(frameId);
     };
-  }, []);
+  }, [isAr]);
 
   return (
     <section
@@ -236,8 +245,8 @@ function CategoryTrackSection({ category, index, total }) {
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between py-6 sm:py-8 lg:py-10">
         {/* Glow Effects */}
-        <div className="pointer-events-none absolute -top-24 left-1/4 w-96 h-96 rounded-full bg-emerald-500/15 blur-[120px]" />
-        <div className="pointer-events-none absolute bottom-0 right-10 w-96 h-96 rounded-full bg-teal-500/10 blur-[130px]" />
+        <div className="pointer-events-none absolute -top-24 start-1/4 w-96 h-96 rounded-full bg-emerald-500/15 blur-[120px]" />
+        <div className="pointer-events-none absolute bottom-0 end-10 w-96 h-96 rounded-full bg-teal-500/10 blur-[130px]" />
 
         {/* Top Header Bar */}
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4 z-10 shrink-0">
@@ -261,7 +270,7 @@ function CategoryTrackSection({ category, index, total }) {
           <div className="flex items-center gap-4 text-xs text-white/60 font-mono">
             <span className="hidden sm:inline-flex items-center gap-1.5">
               <FiArrowDown className="animate-bounce text-emerald-300" />
-              Scroll down to slide projects
+              {isAr ? 'مرر للأسفل للتنقل بين المشاريع' : 'Scroll down to slide projects'}
             </span>
             <div className="w-32 h-1.5 bg-white/10 rounded-full overflow-hidden">
               <div
@@ -274,31 +283,37 @@ function CategoryTrackSection({ category, index, total }) {
 
         {/* Horizontal Track Area */}
         <div className="relative w-full overflow-hidden my-auto py-4 z-10">
-          {/* The Horizontally Scrolling Track */}
           <div
             ref={trackRef}
             className="flex gap-6 sm:gap-8 items-center px-6 sm:px-12 lg:px-24 will-change-transform"
           >
             {category.projects.map((project, pIndex) => (
-              <ProjectCard key={project.id} project={project} index={pIndex} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={pIndex}
+                isAr={isAr}
+              />
             ))}
 
-            {/* End of Category Card - Prompts user to next section */}
+            {/* End of Category Card */}
             <div className="w-[280px] shrink-0 h-[490px] sm:h-[520px] rounded-2xl border border-dashed border-white/20 p-6 flex flex-col justify-center items-center text-center bg-emerald-950/20">
               <span className="w-12 h-12 rounded-full bg-emerald-400/10 text-emerald-300 border border-emerald-400/30 flex items-center justify-center text-xl mb-4">
                 <FiArrowDown />
               </span>
               <h4 className="text-xl font-bold text-white mb-2">
-                {index + 1 < total ? 'Next Category' : 'All Projects Viewed'}
+                {index + 1 < total
+                  ? (isAr ? 'المجال التالي' : 'Next Category')
+                  : (isAr ? 'تم استعراض جميع المشاريع' : 'All Projects Viewed')}
               </h4>
               <p className="text-xs text-white/60 mb-4 max-w-[200px]">
                 {index + 1 < total
-                  ? 'Keep scrolling down to explore next category projects'
-                  : 'You have explored all portfolio categories.'}
+                  ? (isAr ? 'تابع التمرير للأسفل لاستكشاف مشاريع المجال التالي' : 'Keep scrolling down to explore next category projects')
+                  : (isAr ? 'لقد اطلعت على جميع مجالات أعمالنا.' : 'You have explored all portfolio categories.')}
               </p>
               {index + 1 < total && (
                 <span className="text-xs font-semibold text-emerald-300 uppercase tracking-wider">
-                  Scroll ↓
+                  {isAr ? 'مرر ↓' : 'Scroll ↓'}
                 </span>
               )}
             </div>
@@ -310,7 +325,9 @@ function CategoryTrackSection({ category, index, total }) {
           <p className="line-clamp-1 max-w-xl">{category.description}</p>
           <div className="flex items-center gap-2">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-mono text-emerald-300">{category.projects.length} Projects</span>
+            <span className="font-mono text-emerald-300">
+              {isAr ? `${category.projects.length} مشاريع` : `${category.projects.length} Projects`}
+            </span>
           </div>
         </div>
       </div>
