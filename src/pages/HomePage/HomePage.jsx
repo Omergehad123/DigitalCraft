@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
 import HeroSection from './HeroSection';
+import ServicesMarquee from './ServicesMarquee';
 import AboutSection from './AboutSection';
 import ServicesSection from './ServicesSection';
 import ProjectsSection from './ProjectsSection';
 import AdvantagesSection from './AdvantagesSection';
 import OurMethodology from './OurMethodology';
+import TestimonialsSection from './TestimonialsSection';
 import CTAsection from '../../component/layout/CTAsection';
 import { useEffect } from 'react';
 
@@ -21,12 +23,15 @@ export default function HomePage() {
             className="w-full"
         >
             <HeroSection />
+            <ServicesMarquee />
             <AboutSection />
             <ServicesSection />
             <ProjectsSection />
             <AdvantagesSection />
             <OurMethodology />
+            <TestimonialsSection />
             <CTAsection />
         </motion.div>
     );
 }
+

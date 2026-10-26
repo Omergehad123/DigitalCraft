@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { Link } from "react-router-dom";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
+import { FiLayers, FiArrowRight } from 'react-icons/fi';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { motion } from 'framer-motion';
@@ -8,63 +9,8 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import useLanguageStore from "../../store/languageStore";
 
-const projectsData = [
-    {
-        categoryEn: "Enterprise",
-        categoryAr: "منصات مؤسسية",
-        titleEn: "Aetheria Cloud Infrastructure",
-        titleAr: "بنية أثيريا السحابية",
-        descEn: "A mission-critical global telemetry and cloud resource orchestration backend, engineered to handle over 40 million concurrent telemetry events with zero downtime.",
-        descAr: "نظام قياس وإدارة موارد سحابية للمؤسسات مصمم لمعالجة أكثر من 40 مليون عملية متزامنة دون أي توقف في الخدمة.",
-        techs: ["React", "Node.js", "AWS", "TimescaleDB", "Microservices"],
-        image: "project1.png",
-        site: "https://aetheria.cloud/casestudy",
-    },
-    {
-        categoryEn: "Health & Fitness",
-        categoryAr: "الصحة واللياقة",
-        titleEn: "Pulse360 Fitness Tracker",
-        titleAr: "تطبيق النبض 360 الرياضي",
-        descEn: "Cross-platform native mobile app delivering real-time health insights with live biometric integration, AI workout guidance, and offline-first exercise logging.",
-        descAr: "تطبيق جوال متعدد المنصات يقدم بيانات صحية فورية مع دمج القياسات الحيوية وتوجيه التمارين بالذكاء الاصطناعي.",
-        techs: ["React Native", "TensorFlow Lite", "Firebase", "Apple HealthKit"],
-        image: "project2.png",
-        site: "https://pulse360.com/casestudy",
-    },
-    {
-        categoryEn: "E-Commerce",
-        categoryAr: "تجارة إلكترونية",
-        titleEn: "Lumen Marketplace",
-        titleAr: "سوق لومن التجاري",
-        descEn: "A high-conversion storefront and vendor dashboard with realtime inventory, checkout optimization, and campaign analytics for multi-brand retail teams.",
-        descAr: "متجر إلكتروني فائق التحويل ولوحة تحكم متطورة للبائعين مع تتبع فوري للمخزون وتحليلات دقيقة للمبيعات.",
-        techs: ["Next.js", "Stripe", "PostgreSQL", "Redis", "Tailwind"],
-        image: "project1.png",
-        site: "https://lumen.shop/casestudy",
-    },
-    {
-        categoryEn: "Fintech",
-        categoryAr: "تكنولوجيا مالية",
-        titleEn: "Northline Payments",
-        titleAr: "بوابة نورث لاين للمدفوعات",
-        descEn: "Secure payment orchestration with fraud scoring, settlement reporting, and a merchant portal designed for high-volume transaction workflows.",
-        descAr: "معالجة مدفوعات آمنة مع نظام كشف الاحتيال وتقارير تسوية مالية وبوابة تجار للمدفوعات الضخمة.",
-        techs: ["React", "Go", "Kafka", "PostgreSQL", "Kubernetes"],
-        image: "project2.png",
-        site: "https://northline.pay/casestudy",
-    },
-    {
-        categoryEn: "SaaS",
-        categoryAr: "برمجيات SaaS",
-        titleEn: "Harbor Ops Platform",
-        titleAr: "منصة عمليات هاربور",
-        descEn: "An operations console for distributed teams with live status boards, role-based access, and automated incident routing across regions.",
-        descAr: "منصة إدارة عمليات للفرق الموزعة مع لوحات متابعة فورية وإدارة صلاحيات وأتمتة مسارات الحوادث التقنية.",
-        techs: ["React", "TypeScript", "GraphQL", "Node.js", "MongoDB"],
-        image: "project1.png",
-        site: "https://harborops.io/casestudy",
-    },
-];
+// Empty projects array - mock data removed as requested
+const projectsData = [];
 
 function ProjectCard({ project, language, liveText }) {
     const isAr = language === 'ar';
@@ -100,7 +46,7 @@ function ProjectCard({ project, language, liveText }) {
                 </p>
             </div>
             <div className="flex flex-wrap gap-2 mb-3">
-                {project.techs.map((tech) => (
+                {project.techs?.map((tech) => (
                     <span
                         key={tech}
                         className="bg-[rgba(22,137,113,0.10)] px-3 py-1 rounded font-semibold text-xs text-(--main-color) border border-[rgba(22,137,113,0.19)]"
@@ -110,7 +56,7 @@ function ProjectCard({ project, language, liveText }) {
                 ))}
             </div>
             <a
-                href={project.site}
+                href={project.site || "#"}
                 className="mt-auto flex items-center gap-2 font-semibold text-[--second-color] hover:text-(--main-color) text-[15px] transition-colors group"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -131,9 +77,12 @@ function ProjectCard({ project, language, liveText }) {
     );
 }
 
-function ProjectsSection() {
+function ProjectsSection({ projects = projectsData }) {
     const swiperRef = useRef(null);
     const { language, t } = useLanguageStore();
+    const isAr = language === 'ar';
+
+    const hasProjects = projects && projects.length > 0;
 
     return (
         <section className="w-full py-16 lg:py-24 px-5 lg:px-12 xl:px-16 bg-(--bg-color) overflow-x-hidden">
@@ -158,72 +107,133 @@ function ProjectsSection() {
                     to="/portfolio"
                     className="group inline-flex items-center gap-2 text-base sm:text-lg font-semibold text-(--main-color) hover:text-(--second-color) transition-colors"
                 >
-                    <span>{language === 'ar' ? 'استكشف معرض الأعمال كاملاً' : 'Explore Full Portfolio'}</span>
+                    <span>{isAr ? 'استكشف معرض الأعمال كاملاً' : 'Explore Full Portfolio'}</span>
                     <FaLongArrowAltRight className="transition-transform duration-300 group-hover:translate-x-1.5 rtl:group-hover:-translate-x-1.5 rtl:rotate-180" />
                 </Link>
             </motion.div>
 
-            <div className="flex items-center justify-start gap-3 mb-6">
-                <motion.button
-                    type="button"
-                    aria-label="Previous slide"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => swiperRef.current?.slidePrev()}
-                    className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-(--main-color) text-(--main-color) transition-colors hover:bg-(--main-color) hover:text-(--white-color) cursor-pointer"
-                >
-                    <FaLongArrowAltLeft className="rtl:rotate-180" />
-                </motion.button>
-                <motion.button
-                    type="button"
-                    aria-label="Next slide"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => swiperRef.current?.slideNext()}
-                    className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-(--main-color) text-(--main-color) transition-colors hover:bg-(--main-color) hover:text-(--white-color) cursor-pointer"
-                >
-                    <FaLongArrowAltRight className="rtl:rotate-180" />
-                </motion.button>
-            </div>
+            {/* Conditionally Render Slider or Coming Soon State */}
+            {hasProjects ? (
+                <>
+                    <div className="flex items-center justify-start gap-3 mb-6">
+                        <motion.button
+                            type="button"
+                            aria-label="Previous slide"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => swiperRef.current?.slidePrev()}
+                            className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-(--main-color) text-(--main-color) transition-colors hover:bg-(--main-color) hover:text-(--white-color) cursor-pointer"
+                        >
+                            <FaLongArrowAltLeft className="rtl:rotate-180" />
+                        </motion.button>
+                        <motion.button
+                            type="button"
+                            aria-label="Next slide"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => swiperRef.current?.slideNext()}
+                            className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-(--main-color) text-(--main-color) transition-colors hover:bg-(--main-color) hover:text-(--white-color) cursor-pointer"
+                        >
+                            <FaLongArrowAltRight className="rtl:rotate-180" />
+                        </motion.button>
+                    </div>
 
-            <Swiper
-                className="projects-swiper"
-                key={language}
-                dir={language === 'ar' ? 'rtl' : 'ltr'}
-                slidesPerView={3}
-                spaceBetween={30}
-                pagination={{
-                    clickable: true,
-                }}
-                modules={[Pagination, Autoplay]}
-                onSwiper={(swiper) => {
-                    swiperRef.current = swiper;
-                }}
-                loop
-                autoplay={{
-                    delay: 3000,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
-                }}
-                breakpoints={{
-                    0: { slidesPerView: 1 },
-                    768: { slidesPerView: 2 },
-                    1024: { slidesPerView: 3 },
-                }}
-            >
-                {projectsData.map((project) => (
-                    <SwiperSlide key={project.titleEn}>
-                        <ProjectCard
-                            project={project}
-                            language={language}
-                            liveText={t('common.liveLink')}
-                        />
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+                    <Swiper
+                        className="projects-swiper"
+                        key={language}
+                        dir={isAr ? 'rtl' : 'ltr'}
+                        slidesPerView={3}
+                        spaceBetween={30}
+                        pagination={{
+                            clickable: true,
+                        }}
+                        modules={[Pagination, Autoplay]}
+                        onSwiper={(swiper) => {
+                            swiperRef.current = swiper;
+                        }}
+                        loop
+                        autoplay={{
+                            delay: 3000,
+                            disableOnInteraction: false,
+                            pauseOnMouseEnter: true,
+                        }}
+                        breakpoints={{
+                            0: { slidesPerView: 1 },
+                            768: { slidesPerView: 2 },
+                            1024: { slidesPerView: 3 },
+                        }}
+                    >
+                        {projects.map((project, idx) => (
+                            <SwiperSlide key={project.titleEn || idx}>
+                                <ProjectCard
+                                    project={project}
+                                    language={language}
+                                    liveText={t('common.liveLink')}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </>
+            ) : (
+                /* Premium Coming Soon State */
+                <motion.div
+                    initial={{ opacity: 0, y: 25, scale: 0.98 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.55 }}
+                    className="relative overflow-hidden rounded-3xl bg-white border border-[rgba(22,137,113,0.18)] p-8 sm:p-12 lg:p-16 text-center shadow-lg shadow-[rgba(22,117,79,0.06)]"
+                >
+                    {/* Subtle Background Glow */}
+                    <div
+                        className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-emerald-400/10 blur-[100px]"
+                        aria-hidden="true"
+                    />
+
+                    <div className="relative max-w-2xl mx-auto flex flex-col items-center">
+                        <span className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[rgba(22,137,113,0.10)] border border-[rgba(22,137,113,0.22)] text-(--second-color) text-xs font-mono font-bold tracking-wider uppercase mb-6">
+                            <span className="relative flex h-2 w-2">
+                                <span className="absolute inline-flex h-full w-full rounded-full bg-(--second-color) opacity-75 animate-ping" />
+                                <span className="relative inline-flex h-2 w-2 rounded-full bg-(--second-color)" />
+                            </span>
+                            {isAr ? 'قريباً // قيد التوثيق' : 'COMING SOON // IN PRODUCTION'}
+                        </span>
+
+                        <div className="w-14 h-14 rounded-2xl bg-[rgba(22,137,113,0.10)] border border-[rgba(22,137,113,0.2)] flex items-center justify-center text-2xl text-(--second-color) mb-5">
+                            <FiLayers />
+                        </div>
+
+                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-(--main-color) tracking-tight mb-4">
+                            {isAr ? 'أعمالنا ودراسات الحالة قيد التجهيز' : 'Featured Case Studies Coming Soon'}
+                        </h3>
+
+                        <p className="text-[#52726B] text-base sm:text-lg leading-relaxed mb-8 max-w-lg">
+                            {isAr
+                                ? 'نعمل حالياً على توثيق نخبة من أحدث منتجاتنا الرقمية وقصص نجاح عملائنا لإطلاقها هنا قريباً جداً.'
+                                : 'We are currently curating and documenting our latest client success stories and digital products. Stay tuned for the upcoming launch!'}
+                        </p>
+
+                        <div className="flex flex-wrap items-center justify-center gap-4">
+                            <Link
+                                to="/contact"
+                                className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-(--main-color) hover:bg-(--second-color) text-white font-bold text-sm tracking-wide transition-all duration-200 shadow-md hover:shadow-lg active:scale-95"
+                            >
+                                <span>{isAr ? 'ابدأ مشروعك معنا' : 'Start a Project With Us'}</span>
+                                <FiArrowRight className="text-base rtl:rotate-180" />
+                            </Link>
+                            <Link
+                                to="/portfolio"
+                                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-[rgba(22,137,113,0.3)] hover:border-(--main-color) text-(--main-color) font-bold text-sm transition-colors hover:bg-emerald-50/50"
+                            >
+                                <span>{isAr ? 'عرض معرض الأعمال' : 'Browse Portfolio Page'}</span>
+                            </Link>
+                        </div>
+                    </div>
+                </motion.div>
+            )}
         </section>
     );
 }
 
 export default ProjectsSection;
+
 

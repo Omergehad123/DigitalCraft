@@ -53,3 +53,25 @@
 
 @custom-variant hover (&:hover);
 
+/* Seamless Infinite Marquee */
+@keyframes marqueeScroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-infinite {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marqueeScroll 70s linear infinite;
+}
+
+.marquee-wrapper:hover .animate-marquee-infinite {
+  animation-play-state: paused;
+}
+
+
