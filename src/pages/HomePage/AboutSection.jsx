@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { CgWebsite } from "react-icons/cg";
 import { MdOutlineSearch } from "react-icons/md";
 import { SiGooglemarketingplatform } from "react-icons/si";
@@ -19,7 +20,7 @@ function AboutSection() {
         },
         {
             title: "تحسين محركات البحث (SEO)",
-            description: "تهيئة تقنية متكاملة، استراتيجية كلمات بحث، وهيكلة محتوى مصممة لتصدر نتائج البحث وجذب عملاء مستهدفين بدقة.",
+            description: "تهيئة تقنية متكاملة، استراتيجية كلمات بحث، وهيكلة محتوى مصممة لتتصدر نتائج البحث وجذب عملاء مستهدفين بدقة.",
         },
         {
             title: "إعلانات جوجل والتسويق الرقمي",
@@ -41,10 +42,16 @@ function AboutSection() {
     ];
 
     return (
-        <section className="py-16 lg:py-24 px-5 lg:px-12 xl:px-16 bg-(--bg-color)">
+        <section className="py-16 lg:py-24 px-5 lg:px-12 xl:px-16 bg-(--bg-color) overflow-hidden">
             <div className="flex lg:justify-between flex-wrap gap-5 w-full">
                 {/* header of the section */}
-                <div className="max-w-md">
+                <motion.div
+                    initial={{ opacity: 0, y: 25 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.5 }}
+                    className="max-w-md"
+                >
                     <div className="flex items-center gap-2 mb-2">
                         <h6 className="text-(--second-color) uppercase tracking-[0.2em] text-xs font-semibold font-mono">
                             {t('about.label')}
@@ -53,18 +60,29 @@ function AboutSection() {
                     <h2 className="text-2xl lg:text-4xl font-extrabold text-(--main-color) tracking-tight">
                         {t('about.title')}
                     </h2>
-                </div>
+                </motion.div>
 
                 <div className="flex-1 max-w-3xl">
-                    <h3 className="text-xl lg:text-3xl font-medium text-(--main-color) leading-relaxed">
+                    <motion.h3
+                        initial={{ opacity: 0, y: 25 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-60px" }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="text-xl lg:text-3xl font-medium text-(--main-color) leading-relaxed"
+                    >
                         {t('about.statement')}
-                    </h3>
+                    </motion.h3>
 
                     <div className="flex items-center justify-center flex-wrap gap-5 mt-8">
                         {services.map((service, idx) => (
-                            <div
+                            <motion.div
                                 key={service.title}
-                                className="bg-[rgba(22,137,113,0.05)] border border-[rgba(22,137,113,0.13)] rounded-xl p-6 w-80 min-h-[260px] flex flex-col shadow-sm"
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-40px" }}
+                                transition={{ duration: 0.45, delay: 0.15 + idx * 0.1 }}
+                                whileHover={{ y: -6, scale: 1.02 }}
+                                className="bg-[rgba(22,137,113,0.05)] border border-[rgba(22,137,113,0.13)] rounded-xl p-6 w-80 min-h-[260px] flex flex-col shadow-sm transition-shadow duration-300 hover:shadow-lg hover:border-[rgba(22,137,113,0.3)] cursor-default"
                             >
                                 <div className="mb-5">
                                     <div className="w-10 h-10 flex items-center justify-center bg-[rgba(22,137,113,0.10)] rounded-md text-2xl text-(--second-color)">
@@ -77,7 +95,7 @@ function AboutSection() {
                                 <div className="text-(--main-color) text-[15px] leading-relaxed font-normal">
                                     {service.description}
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>

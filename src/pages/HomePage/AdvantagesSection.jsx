@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import useLanguageStore from "../../store/languageStore";
 
 function AdvantagesSection() {
@@ -64,9 +65,15 @@ function AdvantagesSection() {
     ];
 
     return (
-        <section className="w-full bg-(--white-color) py-16 lg:py-24 px-5 lg:px-12 xl:px-16">
+        <section className="w-full bg-(--white-color) py-16 lg:py-24 px-5 lg:px-12 xl:px-16 overflow-hidden">
             {/* Header */}
-            <div className="mb-12">
+            <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5 }}
+                className="mb-12"
+            >
                 <div className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-(--second-color) font-mono">
                     {t('advantages.label')}
                 </div>
@@ -76,23 +83,28 @@ function AdvantagesSection() {
                 <p className="max-w-xl text-base text-(--second-color) font-medium">
                     {t('advantages.description')}
                 </p>
-            </div>
+            </motion.div>
 
             {/* Cards */}
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-                {advantages.map((adv) => (
-                    <div
+                {advantages.map((adv, idx) => (
+                    <motion.div
                         key={adv.id}
-                        className="bg-(--bg-color) rounded-2xl shadow-sm p-6 flex flex-col border border-[rgba(22,137,113,0.10)]"
+                        initial={{ opacity: 0, y: 35 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-40px" }}
+                        transition={{ duration: 0.45, delay: idx * 0.1 }}
+                        whileHover={{ y: -6, scale: 1.02 }}
+                        className="bg-(--main-color) rounded-2xl shadow-sm p-6 flex flex-col border border-[rgba(22,137,113,0.15)] hover:border-emerald-400/40 transition-colors"
                         style={{ boxShadow: "0 8px 32px 0 rgba(22,117,79,0.07)" }}
                     >
                         <div className="text-sm font-semibold uppercase tracking-wide text-(--second-color) font-mono">
                             {adv.label}
                         </div>
-                        <h3 className="text-lg font-bold text-[--main-color] mt-3">{adv.title}</h3>
-                        <p className="text-sm text-[#777] font-normal mt-2 leading-relaxed">{adv.desc}</p>
-                        <span className="text-xs text-(--second-color) mt-3 font-mono font-semibold">{adv.iconLabel}</span>
-                    </div>
+                        <h3 className="text-xl text-(--white-color) mt-3">{adv.title}</h3>
+                        <p className="text-sm text-[#aaa] font-normal mt-2 leading-relaxed">{adv.desc}</p>
+                        <span className="text-xs text-(--second-color) mt-auto pt-3 font-mono font-semibold">{adv.iconLabel}</span>
+                    </motion.div>
                 ))}
             </div>
         </section>

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import useLanguageStore from "../../store/languageStore";
 
 const stepIcons = [
@@ -101,9 +102,15 @@ function OurMethodology() {
     ];
 
     return (
-        <section className="w-full bg-(--bg-color) py-16 lg:py-24 px-5 lg:px-12 xl:px-16">
+        <section className="w-full bg-(--bg-color) py-16 lg:py-24 px-5 lg:px-12 xl:px-16 overflow-hidden">
             {/* Header */}
-            <div className="mb-12">
+            <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5 }}
+                className="mb-12"
+            >
                 <div className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-(--second-color) font-mono">
                     {t('methodology.label')}
                 </div>
@@ -113,14 +120,19 @@ function OurMethodology() {
                 <p className="max-w-2xl text-base md:text-lg text-(--second-color) font-medium leading-relaxed">
                     {t('methodology.description')}
                 </p>
-            </div>
+            </motion.div>
 
             {/* Steps */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
                 {methodologySteps.map((step, idx) => (
-                    <div
+                    <motion.div
                         key={step.id}
-                        className="rounded-2xl bg-white border border-[rgba(22,137,113,0.10)] shadow-sm p-6 flex flex-col gap-4"
+                        initial={{ opacity: 0, y: 35 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-40px" }}
+                        transition={{ duration: 0.45, delay: idx * 0.08 }}
+                        whileHover={{ y: -6, scale: 1.02 }}
+                        className="rounded-2xl bg-white border border-[rgba(22,137,113,0.12)] hover:border-[rgba(22,137,113,0.3)] shadow-sm p-6 flex flex-col gap-4 transition-colors"
                         style={{ boxShadow: "0 6px 24px 0 rgba(22,117,79,0.08)" }}
                     >
                         <div className="flex items-center justify-between">
@@ -136,7 +148,7 @@ function OurMethodology() {
                         <span className="text-xs text-(--second-color) mt-auto pt-2 font-mono font-semibold tracking-wide uppercase">
                             {step.sublabel}
                         </span>
-                    </div>
+                    </motion.div>
                 ))}
             </div>
         </section>

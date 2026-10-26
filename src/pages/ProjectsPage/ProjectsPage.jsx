@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import HeroSection from './HeroSection';
 import ProjectsSection from './ProjectsSection';
 import useProjectsStore from '../../store/projectsStore';
@@ -21,8 +23,18 @@ function ProjectsPage() {
         }
     };
 
+    // Scroll to the top of the page on component mount
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }, []);
+
     return (
-        <main className="w-full bg-[#05130d]">
+        <motion.main
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="w-full bg-(--bg-color)"
+        >
             <HeroSection
                 categories={categoryNames}
                 active={activeCategory}
@@ -31,7 +43,7 @@ function ProjectsPage() {
             />
             <ProjectsSection />
             <CTAsection />
-        </main>
+        </motion.main>
     );
 }
 

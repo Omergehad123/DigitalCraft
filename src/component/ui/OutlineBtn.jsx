@@ -1,17 +1,24 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
-function OutlineBtn({ text, link, onClick, className = "" }) {
+const MotionLink = motion.create(Link);
+
+function OutlineBtn({ text, link = "#", onClick, className = "" }) {
     return (
-        <Link to={link}
+        <MotionLink
+            to={link}
+            whileHover={{ scale: 1.03, y: -1 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
             className={
-                "px-6 py-2 rounded-md border-2 border-(--main-color) text-(--main-color) font-semibold transition-all duration-300 hover:bg-(--main-color) hover:text-(--white-color) hover:shadow-md focus:outline-none " +
+                "inline-block text-center px-6 py-2 rounded-md border-2 border-(--main-color) text-(--main-color) font-semibold transition-all duration-300 hover:bg-(--main-color) hover:text-(--white-color) hover:shadow-md focus:outline-none cursor-pointer " +
                 className
             }
             onClick={onClick}
         >
             {text}
-        </Link>
+        </MotionLink>
     );
 }
 
-export default OutlineBtn;
+export default OutlineBtn;

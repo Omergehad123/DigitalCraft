@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { motion } from 'framer-motion';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import useLanguageStore from "../../store/languageStore";
@@ -72,17 +73,21 @@ function ProjectCard({ project, language, liveText }) {
     const category = isAr ? project.categoryAr : project.categoryEn;
 
     return (
-        <div
-            className="bg-white rounded-2xl shadow-sm p-6 flex flex-col gap-5 w-full h-full border border-[rgba(22,137,113,0.10)]"
+        <motion.div
+            whileHover={{ y: -6 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white rounded-2xl shadow-sm p-6 flex flex-col gap-5 w-full h-full border border-[rgba(22,137,113,0.12)] hover:border-[rgba(22,137,113,0.3)] transition-colors"
             style={{ boxShadow: "0 8px 32px 0 rgba(22,117,79,0.07)" }}
         >
-            <div className="relative">
+            <div className="relative overflow-hidden rounded-lg">
                 <span className="absolute top-3 start-3 z-10 bg-(--main-color) text-(--white-color) text-xs font-semibold px-3 py-1 rounded-full border border-[rgba(22,137,113,0.15)] uppercase tracking-wide shadow-sm">
                     {category}
                 </span>
-                <img
+                <motion.img
                     src={project.image}
                     alt={title}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.4 }}
                     className="w-full h-44 object-cover rounded-lg border border-[rgba(22,137,113,0.09)]"
                 />
             </div>
@@ -122,7 +127,7 @@ function ProjectCard({ project, language, liveText }) {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L21 10.5m0 0l-3.75 3.75M21 10.5H3" />
                 </svg>
             </a>
-        </div>
+        </motion.div>
     );
 }
 
@@ -132,7 +137,13 @@ function ProjectsSection() {
 
     return (
         <section className="w-full py-16 lg:py-24 px-5 lg:px-12 xl:px-16 bg-(--bg-color) overflow-x-hidden">
-            <div className="flex items-end justify-between flex-wrap gap-6 pb-8 mb-12 lg:mb-16 border-b border-[rgba(22,117,79,0.14)]">
+            <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5 }}
+                className="flex items-end justify-between flex-wrap gap-6 pb-8 mb-12 lg:mb-16 border-b border-[rgba(22,117,79,0.14)]"
+            >
                 <div>
                     <div className="flex items-center gap-2 mb-2">
                         <h6 className="text-(--second-color) uppercase tracking-[0.2em] text-xs font-semibold font-mono">
@@ -150,25 +161,29 @@ function ProjectsSection() {
                     <span>{language === 'ar' ? 'استكشف معرض الأعمال كاملاً' : 'Explore Full Portfolio'}</span>
                     <FaLongArrowAltRight className="transition-transform duration-300 group-hover:translate-x-1.5 rtl:group-hover:-translate-x-1.5 rtl:rotate-180" />
                 </Link>
-            </div>
+            </motion.div>
 
             <div className="flex items-center justify-start gap-3 mb-6">
-                <button
+                <motion.button
                     type="button"
                     aria-label="Previous slide"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => swiperRef.current?.slidePrev()}
-                    className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-(--main-color) text-(--main-color) transition-all duration-300 hover:bg-(--main-color) hover:text-(--white-color) cursor-pointer"
+                    className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-(--main-color) text-(--main-color) transition-colors hover:bg-(--main-color) hover:text-(--white-color) cursor-pointer"
                 >
                     <FaLongArrowAltLeft className="rtl:rotate-180" />
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                     type="button"
                     aria-label="Next slide"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => swiperRef.current?.slideNext()}
-                    className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-(--main-color) text-(--main-color) transition-all duration-300 hover:bg-(--main-color) hover:text-(--white-color) cursor-pointer"
+                    className="flex h-11 w-11 items-center justify-center rounded-md border-2 border-(--main-color) text-(--main-color) transition-colors hover:bg-(--main-color) hover:text-(--white-color) cursor-pointer"
                 >
                     <FaLongArrowAltRight className="rtl:rotate-180" />
-                </button>
+                </motion.button>
             </div>
 
             <Swiper
@@ -211,3 +226,4 @@ function ProjectsSection() {
 }
 
 export default ProjectsSection;
+

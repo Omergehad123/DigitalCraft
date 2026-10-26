@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import useLanguageStore from "../../store/languageStore";
 
 const headingClass =
@@ -35,18 +36,46 @@ export default function Footer() {
         "Maintenance & Support",
     ];
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.1,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    };
+
     return (
-        <footer className="w-full bg-[#013E2C] text-emerald-100">
-            <div className="max-w-screen-2xl mx-auto px-6 sm:px-10 lg:px-16 py-14 grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1.2fr_1fr]">
+        <footer className="w-full bg-[#013E2C] text-emerald-100 overflow-hidden">
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                className="max-w-screen-2xl mx-auto px-6 sm:px-10 lg:px-16 py-14 grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1.2fr_1fr]"
+            >
 
                 {/* Brand */}
-                <div className="max-w-sm">
+                <motion.div variants={itemVariants} className="max-w-sm">
                     <Link
                         to="/"
                         aria-label="Digital Craft home"
-                        className="inline-flex items-center gap-3 mb-5"
+                        className="inline-flex items-center gap-3 mb-5 group"
                     >
-                        <img src="/icon.jpeg" alt="Digital Craft" className="w-20 rounded-lg shadow-sm" />
+                        <motion.img
+                            src="/icon.jpeg"
+                            alt="Digital Craft"
+                            className="w-20 rounded-lg shadow-sm"
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ duration: 0.2 }}
+                        />
                     </Link>
 
                     <p className="text-[15px] sm:text-base leading-relaxed text-emerald-100/70">
@@ -55,15 +84,15 @@ export default function Footer() {
 
                     <Link
                         to="/contact"
-                        className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-white transition-colors hover:text-emerald-300"
+                        className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-white transition-colors hover:text-emerald-300 group"
                     >
-                        {t('footer.buildTogether')}
-                        <span aria-hidden="true" className="rtl:rotate-180">↗</span>
+                        <span>{t('footer.buildTogether')}</span>
+                        <span aria-hidden="true" className="transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180">↗</span>
                     </Link>
-                </div>
+                </motion.div>
 
                 {/* Navigation */}
-                <nav aria-label="Footer navigation">
+                <motion.nav variants={itemVariants} aria-label="Footer navigation">
                     <h3 className={headingClass}>
                         {t('footer.explore')}
                     </h3>
@@ -80,10 +109,10 @@ export default function Footer() {
                             </li>
                         ))}
                     </ul>
-                </nav>
+                </motion.nav>
 
                 {/* Services */}
-                <div>
+                <motion.div variants={itemVariants}>
                     <h3 className={headingClass}>
                         {t('footer.whatWeDo')}
                     </h3>
@@ -100,10 +129,10 @@ export default function Footer() {
                             </li>
                         ))}
                     </ul>
-                </div>
+                </motion.div>
 
                 {/* Contact */}
-                <div>
+                <motion.div variants={itemVariants}>
                     <h3 className={headingClass}>
                         {t('footer.connectHeading')}
                     </h3>
@@ -112,14 +141,16 @@ export default function Footer() {
                         {t('footer.connectText')}
                     </p>
 
-                    <Link
-                        to="/contact"
-                        className="inline-flex items-center justify-center rounded-md bg-white px-5 py-3 text-sm font-semibold text-[#013E2C] transition-colors hover:bg-emerald-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-                    >
-                        {t('footer.startProject')}
-                    </Link>
-                </div>
-            </div>
+                    <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                        <Link
+                            to="/contact"
+                            className="inline-flex items-center justify-center rounded-md bg-white px-5 py-3 text-sm font-semibold text-[#013E2C] transition-colors hover:bg-emerald-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                        >
+                            {t('footer.startProject')}
+                        </Link>
+                    </motion.div>
+                </motion.div>
+            </motion.div>
 
             {/* Copyright bottom bar */}
             <div className="border-t border-emerald-900/50 py-6 text-center text-xs text-emerald-100/60">
@@ -128,3 +159,4 @@ export default function Footer() {
         </footer>
     );
 }
+

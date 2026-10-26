@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Button from "../../component/ui/Button";
 import OutlineBtn from "../../component/ui/OutlineBtn";
 import useLanguageStore from "../../store/languageStore";
@@ -17,12 +18,43 @@ function HeroSection() {
         { title: "Digital marketing", note: "Reach the customers who matter" },
     ];
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.1,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    };
+
     return (
-        <section className="w-full px-4 lg:px-10 py-6 lg:py-10">
-            <div className="relative max-w-7xl mx-auto overflow-hidden rounded-[2rem] bg-[#06150f] px-6 sm:px-10 lg:px-16 pt-16 lg:pt-24 pb-10 lg:pb-14">
+        <section className="w-full px-4 lg:px-10 py-6 lg:py-10 overflow-hidden">
+            <motion.div
+                initial={{ opacity: 0, y: 30, scale: 0.99 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="relative max-w-7xl mx-auto overflow-hidden rounded-[2rem] bg-[#06150f] px-6 sm:px-10 lg:px-16 pt-16 lg:pt-24 pb-10 lg:pb-14 shadow-2xl shadow-emerald-950/20"
+            >
                 {/* Ambient glow + faint grid */}
-                <div className="pointer-events-none absolute -top-48 -end-32 w-140 h-140 rounded-full bg-emerald-500/25 blur-[130px]" aria-hidden="true" />
-                <div className="pointer-events-none absolute -bottom-56 -start-40 w-120 h-120 rounded-full bg-teal-400/10 blur-[120px]" aria-hidden="true" />
+                <motion.div
+                    animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.3, 0.2] }}
+                    transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
+                    className="pointer-events-none absolute -top-48 -end-32 w-140 h-140 rounded-full bg-emerald-500/25 blur-[130px]"
+                    aria-hidden="true"
+                />
+                <motion.div
+                    animate={{ scale: [1, 1.15, 1], opacity: [0.1, 0.18, 0.1] }}
+                    transition={{ repeat: Infinity, duration: 9, ease: "easeInOut" }}
+                    className="pointer-events-none absolute -bottom-56 -start-40 w-120 h-120 rounded-full bg-teal-400/10 blur-[120px]"
+                    aria-hidden="true"
+                />
                 <div
                     className="pointer-events-none absolute inset-0 opacity-[0.07]"
                     aria-hidden="true"
@@ -35,20 +67,34 @@ function HeroSection() {
                     }}
                 />
 
-                <div className="relative">
-                    <p className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 text-sm font-medium text-emerald-200 mb-8">
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="relative"
+                >
+                    <motion.p
+                        variants={itemVariants}
+                        className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 text-sm font-medium text-emerald-200 mb-8"
+                    >
                         <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
                         {t('servicesPage.badge')}
-                    </p>
+                    </motion.p>
 
-                    <h1 className="max-w-4xl text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.05] text-(--white-color)">
+                    <motion.h1
+                        variants={itemVariants}
+                        className="max-w-4xl text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.05] text-(--white-color)"
+                    >
                         {t('servicesPage.titleLead')}{" "}
                         <span className="text-(--second-color)">
                             {t('servicesPage.titleHighlight')}
                         </span>
-                    </h1>
+                    </motion.h1>
 
-                    <div className="mt-8 lg:mt-10 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+                    <motion.div
+                        variants={itemVariants}
+                        className="mt-8 lg:mt-10 flex flex-col lg:flex-row lg:items-end justify-between gap-8"
+                    >
                         <p className="max-w-xl text-base lg:text-lg leading-relaxed text-white/65">
                             {t('servicesPage.description')}
                         </p>
@@ -57,13 +103,16 @@ function HeroSection() {
                             <Button text={t('common.startProject')} link="/contact" />
                             <OutlineBtn text={t('common.seeOurWork')} link="/portfolio" />
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Service strip */}
                     <ul className="mt-14 lg:mt-20 grid grid-cols-2 lg:grid-cols-4 border-t border-white/10">
                         {services.map((s, i) => (
-                            <li
+                            <motion.li
                                 key={s.title}
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.4 + i * 0.08 }}
                                 className={`py-6 pe-4 lg:px-6 lg:first:ps-0 ${i > 0 ? "lg:border-s lg:border-white/10" : ""}`}
                             >
                                 <span className="block text-sm font-mono text-emerald-300/70 mb-2">
@@ -71,11 +120,11 @@ function HeroSection() {
                                 </span>
                                 <span className="block text-lg font-bold text-white">{s.title}</span>
                                 <span className="block mt-1 text-sm text-white/50">{s.note}</span>
-                            </li>
+                            </motion.li>
                         ))}
                     </ul>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </section>
     );
 }
